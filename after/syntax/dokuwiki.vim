@@ -91,7 +91,6 @@ syn region dokuwikiHeading4 matchgroup=dokuwikiHeading4mg start="^=\{3}\s.\+\s=\
 syn region dokuwikiHeading5 matchgroup=dokuwikiHeading5mg start="^=\{2}\s.\+\s=\{2}$" end="^\ze\(=\{2,6}\)\s.*\s\1$" fold contains=@Spell,@dokuwikiBlockItems,dokuwikiList
 
 "l0xy
-syn region bootstrap_callout matchgroup=bootstrap_callout_mg start="^<callout>$" end="^<\/callout>$" contains=ALL concealends
 
 " Basic Formatting: **bold**, //italic//, __underline__, ''monospace'', etc
 " A matchgroup is necessary to make concealends work with regions.
@@ -115,20 +114,25 @@ syn region plugin_sxh matchgroup=FoldColumn start="<sxh>" end="</sxh>" contains=
 " l0xy:
 "   bootstrap
 "   labels
-syn region bootstrap_label_default matchgroup=FoldColumn start="<label>" end="</label>" contains=ALLBUT,bootstrap_label_default,@dokuwikiNoneTextItem extend concealends
-syn region bootstrap_label_default matchgroup=FoldColumn start="<label type=\"default\">" end="</label>" contains=ALLBUT,bootstrap_label_default,@dokuwikiNoneTextItem extend concealends
-syn region bootstrap_label_primary matchgroup=FoldColumn start="<label type=\"primary\">" end="</label>" contains=ALLBUT,bootstrap_label_primary,@dokuwikiNoneTextItem extend concealends
-syn region bootstrap_label_success matchgroup=FoldColumn start="<label type=\"success\">" end="</label>" contains=ALLBUT,bootstrap_label_success,@dokuwikiNoneTextItem extend concealends
-syn region bootstrap_label_info matchgroup=FoldColumn start="<label type=\"info\">" end="</label>" contains=ALLBUT,bootstrap_label_info,@dokuwikiNoneTextItem extend concealends
-syn region bootstrap_label_danger matchgroup=FoldColumn start="<label type=\"danger\">" end="</label>" contains=ALLBUT,bootstrap_label_danger,@dokuwikiNoneTextItem extend concealends
-syn region bootstrap_label_warning matchgroup=FoldColumn start="<label type=\"warning\">" end="</label>" contains=ALLBUT,bootstrap_label_warning,@dokuwikiNoneTextItem extend concealends
+syn region bs_default matchgroup=FoldColumn start="<label>" end="</label>" contains=ALLBUT,bs_default,@dokuwikiNoneTextItem extend concealends
+syn region bs_default matchgroup=FoldColumn start="<label type=\"default\">" end="</label>" contains=ALLBUT,bs_default,@dokuwikiNoneTextItem extend concealends
+syn region bs_primary matchgroup=FoldColumn start="<label type=\"primary\">" end="</label>" contains=ALLBUT,bs_primary,@dokuwikiNoneTextItem extend concealends
+syn region bs_success matchgroup=FoldColumn start="<label type=\"success\">" end="</label>" contains=ALLBUT,bs_success,@dokuwikiNoneTextItem extend concealends
+syn region bs_info matchgroup=FoldColumn start="<label type=\"info\">" end="</label>" contains=ALLBUT,bs_info,@dokuwikiNoneTextItem extend concealends
+syn region bs_danger matchgroup=FoldColumn start="<label type=\"danger\">" end="</label>" contains=ALLBUT,bs_danger,@dokuwikiNoneTextItem extend concealends
+syn region bs_warning matchgroup=FoldColumn start="<label type=\"warning\">" end="</label>" contains=ALLBUT,bs_warning,@dokuwikiNoneTextItem extend concealends
 "    callouts
-syn region bootstrap_label_default matchgroup=deemphesize start="<callout>" end="<\/callout>" contains=ALLBUT,@dokuwikiNoneTextItem 
-syn region bootstrap_label_warning matchgroup=deemphesize start="<callout.*type=\"warning\".*>" end="<\/callout>" contains=ALLBUT,@dokuwikiNoneTextItem
-syn region bootstrap_label_success matchgroup=deemphesize start="<callout.*type=\"success\".*>" end="<\/callout>" contains=ALLBUT,@dokuwikiNoneTextItem
-syn region bootstrap_label_info matchgroup=deemphesize start="<callout.*type=\"info\".*>" end="<\/callout>" contains=ALLBUT,@dokuwikiNoneTextItem
-syn region bootstrap_label_primary matchgroup=deemphesize start="<callout.*type=\"info\".*>" end="<\/callout>" contains=ALLBUT,@dokuwikiNoneTextItem
-syn region bootstrap_label_danger matchgroup=deemphesize start="<callout.*type=\"danger\".*>" end="<\/callout>" contains=ALLBUT,@dokuwikiNoneTextItem
+syn region bs_default matchgroup=bs_default_alt start="<callout>" end="<\/callout>" contains=ALLBUT,@dokuwikiNoneTextItem 
+syn region bs_warning matchgroup=bs_warning_alt start="<callout.*type=\"warning\".*>" end="<\/callout>" contains=ALLBUT,@dokuwikiNoneTextItem
+syn region bs_success matchgroup=bs_success_alt start="<callout.*type=\"success\".*>" end="<\/callout>" contains=ALLBUT,@dokuwikiNoneTextItem
+
+syn region bs_info_co matchgroup=bs_info_params start="<callout.*type=\"info\".*>" end="<\/callout>" contains=ALLBUT,@dokuwikiNoneTextItem extend keepend
+syn region bs_info_co_title matchgroup=FoldColumn start="<callout.*type=\"info\".*title=\"" end="\">" contains=ALLBUT,bs_info_params,@dokuwikiNoneTextItem contained extend concealends
+syn match bs_info_params "^<callout.*type=\"info\".*title=\"" contained nextgroup=bs_info_alt conceal
+syn match bs_info_params "<\/callout>" contained conceal
+
+syn region bs_primary matchgroup=bs_primary_alt start="<callout.*type=\"info\".*>" end="<\/callout>" contains=ALLBUT,@dokuwikiNoneTextItem
+syn region bs_danger matchgroup=bs_danger_alt start="<callout.*type=\"danger\".*>" end="<\/callout>" contains=ALLBUT,@dokuwikiNoneTextItem
 
 
 syn region dokuwikiStrikethrough matchgroup=FoldColumn start="<del>" end="</del>" contains=ALLBUT,@dokuwikiNoneTextItem,dokuwikiStrikethrough extend concealends
@@ -243,7 +247,7 @@ syn cluster dokuwikiTextItems add=dokuwikiSubscript,dokuwikiSuperscript,dokuwiki
 syn cluster dokuwikiTextItems add=dokuwikiExternalLink,dokuwikiInternalLink,dokuwikiMediaLink
 syn cluster dokuwikiTextItems add=dokuwikiFootnotes,dokuwikiLinebreak,dokuwikiNowiki,dokuwikiCodeBlock
 " l0xy:
-syn cluster dokuwikiTextItems add=tag_kw,tag_cmd,tag_txt,tag_path,bootstrap_label_default,bootstrap_label_primary,bootstrap_label_warning,bootstrap_label_danger,bootstrap_label_info,bootstrap_label_success,plugin_sxh,dokuwikiLinkRef
+syn cluster dokuwikiTextItems add=tag_kw,tag_cmd,tag_txt,tag_path,bs_default,bs_primary,bs_warning,bs_danger,bs_info,bs_success,plugin_sxh,dokuwikiLinkRef
 
 " @dokuwikiBlockItems only work all by themselves
 syn cluster dokuwikiBlockItems add=@dokuwikiTextItems,dokuwikiCodeBlockPlain,dokuwikiHorizontalLine,dokuwikiQuotes,dokuwikiTable,dokuwikiEmbedded,dokuwikiControlMacros
@@ -311,7 +315,7 @@ hi link dokuwikiHorizontalLine NonText
 
 "l0xy:
 "  custom
-hi def deemphesize ctermfg=8
+
 hi def tag_kw term=bold cterm=bold ctermfg=2 gui=bold guifg=#ff00ff
 hi def tag_cmd term=bold cterm=bold ctermfg=4 gui=bold guifg=#ff00ff
 hi def tag_txt term=bold cterm=bold ctermfg=3 gui=bold guifg=#ff00ff
@@ -323,12 +327,19 @@ hi def plugin_sxh ctermfg=black ctermbg=magenta gui=bold guifg=#ff00ff
 
 "l0xy:
 "  bootstrap
-hi def bootstrap_label_default ctermfg=black ctermbg=grey
-hi def bootstrap_label_primary ctermfg=black ctermbg=blue
-hi def bootstrap_label_info ctermfg=black ctermbg=lightblue
-hi def bootstrap_label_success ctermfg=black ctermbg=green
-hi def bootstrap_label_warning ctermfg=black ctermbg=yellow
-hi def bootstrap_label_danger ctermfg=black ctermbg=red
+hi def bs_default_alt ctermfg=grey ctermbg=black
+hi def bs_primary_alt ctermfg=blue ctermbg=black
+hi def bs_info_alt ctermfg=lightblue ctermbg=black
+hi def bs_success_alt ctermfg=green ctermbg=black
+hi def bs_warning_alt ctermfg=yellow ctermbg=black
+hi def bs_danger_alt ctermfg=red ctermbg=black
+
+hi def bs_default ctermfg=black ctermbg=grey
+hi def bs_primary ctermfg=black ctermbg=blue
+hi def bs_info ctermfg=black ctermbg=lightblue
+hi def bs_success ctermfg=black ctermbg=green
+hi def bs_warning ctermfg=black ctermbg=yellow
+hi def bs_danger ctermfg=black ctermbg=red
 
 """ }}}
 

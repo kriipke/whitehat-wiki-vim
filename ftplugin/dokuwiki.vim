@@ -4,15 +4,15 @@ imap ;a [[]]<esc>2ha
 
 vmap ;b "zdi**<c-r>z**
 nmap ;b i****<esc>2ha
-imap ;b **  **<esc>2hi
+imap ;b ****<esc>2hi
 
 vmap ;u "zdi__<c-r>z__
 nmap ;u i____<esc>2ha
-imap ;u __  __<esc>2hi
+imap ;u ____<esc>2hi
 
 vmap ;i "zdi//<c-r>z//
 nmap ;i i////<esc>2ha
-imap ;i //  //<esc>2hi
+imap ;i ////<esc>2hi
 
 vmap ;1 "zdi======= <c-r>z =======
 vmap ;2 "zdi====== <c-r>z ======
@@ -27,10 +27,10 @@ nmap ;4 i====  ====<esc>5hi
 nmap ;5 i===  ===<esc>4hi
 nmap ;6 i==  ==<esc>3ha
 imap ;1 =======  =======<esc>8hi
-imap ;2 ======  ======<esc>6hi
-imap ;3 =====  =====<esc>5hi
-imap ;4 ====  ====<esc>4hi
-imap ;5 ===  ===<esc>3hi
+imap ;2 ======  ======<esc>7hi
+imap ;3 =====  =====<esc>6hi
+imap ;4 ====  ====<esc>5hi
+imap ;5 ===  ===<esc>4hi
 imap ;6 ==  ==<esc>3ha
 
 " custom tags
@@ -59,6 +59,7 @@ nmap ;ld i<label type="danger"></label><esc>7hi
 nmap ;lp i<label type="primary"></label><esc>7hi
 nmap ;ls i<label type="success"></label><esc>7hi
 
+nmap ;call i<callout><esc>o</callout><esc>O
 nmap ;info i<callout type="info" icon="true"><esc>o</callout><esc>O
 nmap ;warn i<callout type="warning" icon="true"><esc>o</callout><esc>O
 nmap ;dang i<callout type="danger" icon="true"><esc>o</callout><esc>O
@@ -71,11 +72,11 @@ imap ;c <cmd></cmd><esc>6hi
 imap ;t <txt></txt><esc>6hi
 imap ;p <path></path><esc>7hi
 
-imap ;l <label></label><esc>8hi
-imap ;lw <label type="warning"></label><esc>8hi
-imap ;ld <label type="danger"></label><esc>8hi
-imap ;lp <label type="primary"></label><esc>8hi
-imap ;ls <label type="success"></label><esc>8hi
+imap ;l <label></label><esc>7hi
+imap ;lw <label type="warning"></label><esc>7hi
+imap ;ld <label type="danger"></label><esc>7hi
+imap ;lp <label type="primary"></label><esc>7hi
+imap ;ls <label type="success"></label><esc>7hi
 
 imap ;info <callout type="info" icon="true"></callout><esc>10ho
 imap ;warn <callout type="warning" icon="true"></callout><esc>10ho
